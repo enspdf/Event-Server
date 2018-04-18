@@ -21,6 +21,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public int createRole(RoleDto roleDto) {
+        return 0;
+    }
+
+    @Override
     public RoleReport getRoleById(Long userId) {
         return null;
     }
