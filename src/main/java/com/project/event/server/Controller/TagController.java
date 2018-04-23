@@ -29,6 +29,7 @@ public class TagController {
     @ResponseBody
     public ResponseEntity createTag (@RequestBody @Valid TagDto tagDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("status", tagService.createTag(tagDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }

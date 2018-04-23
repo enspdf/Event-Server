@@ -1,7 +1,7 @@
 package com.project.event.server.Controller;
 
-import com.project.event.server.Domain.Dto.RoleDto;
-import com.project.event.server.Service.RoleService;
+import com.project.event.server.Domain.Dto.EventDto;
+import com.project.event.server.Service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,23 +13,23 @@ import javax.validation.Valid;
 import java.util.HashMap;
 
 @RestController
-public class RoleController {
+public class EventControlller {
     @Autowired
-    private RoleService roleService;
+    private EventService eventService;
 
-    @GetMapping("/role.list")
+    @GetMapping("/event.list")
     @ResponseBody
-    public ResponseEntity getAllRoles (HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResponseEntity getAllEvents (HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("roles", roleService.getAllRoles());
+        result.put("events", eventService.getAllEvents());
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PostMapping("/role.create")
+    @PostMapping("/event.create")
     @ResponseBody
-    public ResponseEntity createRole (@RequestBody @Valid RoleDto roleDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResponseEntity createEvent (@RequestBody @Valid EventDto eventDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("status", roleService.createRole(roleDto));
+        result.put("status", eventService.createEvenInt(eventDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }

@@ -29,6 +29,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity createUser (@RequestBody @Valid UserDto userDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("status", userService.createUser(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }
