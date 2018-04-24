@@ -31,8 +31,8 @@ public class EventTypeServiceImpl implements EventTypeService {
     }
 
     @Override
-    public EventTypeReport updateEventType(EventTypeDto eventTypeDto) {
-        return null;
+    public int updateEventType(EventTypeDto eventTypeDto) {
+        return 0;
     }
 
     @Override

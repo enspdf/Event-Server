@@ -9,6 +9,6 @@ public interface UserDao {
     List<UserReport> getAllUsers ();
     int createUser (UserDto userDto);
     UserReport getUserById (Long userId);
-    UserReport updateUser (UserDto userDto);
+    int updateUser (UserDto userDto);
     void deleteUser (Long userId);
 }

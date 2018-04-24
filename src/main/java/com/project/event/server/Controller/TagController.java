@@ -32,4 +32,27 @@ public class TagController {
         result.put("status", tagService.createTag(tagDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
+
+    @PostMapping("/tag.update")
+    @ResponseBody
+    public ResponseEntity updateTag (@RequestBody @Valid TagDto tagDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", tagService.updateTag(tagDto));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/tag.{id}")
+    @ResponseBody
+    public ResponseEntity getTagById (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("tag", tagService.getTagById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PostMapping("/tag.remove.{id}")
+    @ResponseBody
+    public ResponseEntity removeTag (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }

@@ -31,8 +31,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleReport updateRole(RoleDto roleDto) {
-        return null;
+    public int updateRole(RoleDto roleDto) {
+        return 0;
     }
 
     @Override

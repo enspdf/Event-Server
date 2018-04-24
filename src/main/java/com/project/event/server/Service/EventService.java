@@ -9,6 +9,6 @@ public interface EventService {
     List<EventReport> getAllEvents ();
     int createEvenInt (EventDto eventDto);
     EventReport getEventById (Long id);
-    EventReport updateEvent (EventDto eventDto);
+    int updateEvent (EventDto eventDto);
     void deleteEvent (Long id);
 }

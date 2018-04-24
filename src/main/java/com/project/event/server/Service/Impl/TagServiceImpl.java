@@ -21,21 +21,21 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public int createTag(TagDto tagDto) {
-        return 0;
+        return tagDao.createTag(tagDto);
     }
 
     @Override
     public TagReport getTagById(Long id) {
-        return null;
+        return tagDao.getTagById(id);
     }
 
     @Override
-    public TagReport updateTag(TagDto tagDto) {
-        return null;
+    public int updateTag(TagDto tagDto) {
+        return tagDao.updateTag(tagDto);
     }
 
     @Override
     public void deleteTag(Long id) {
-
+        tagDao.deleteTag(id);
     }
 }

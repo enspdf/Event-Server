@@ -9,6 +9,6 @@ public interface EventTypeService {
     List<EventTypeReport> getAllEventTypes ();
     int createEventType (EventTypeDto eventTypeDto);
     EventTypeReport getEventTypeById (Long id);
-    EventTypeReport updateEventType (EventTypeDto eventTypeDto);
+    int updateEventType (EventTypeDto eventTypeDto);
     void deleteEventType (Long id);
 }

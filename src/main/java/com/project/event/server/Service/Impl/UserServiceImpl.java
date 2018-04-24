@@ -7,6 +7,7 @@ import com.project.event.server.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,21 +23,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int createUser(UserDto userDto) {
-        return 0;
+        userDto.setCreationDate(new Date());
+        return userDao.createUser(userDto);
     }
 
     @Override
     public UserReport getUserById(Long userId) {
-        return null;
+        return userDao.getUserById(userId);
     }
 
     @Override
-    public UserReport updateUser(UserDto userDto) {
-        return null;
+    public int updateUser(UserDto userDto) {
+        return userDao.updateUser(userDto);
     }
 
     @Override
     public void deleteUser(Long userId) {
-
+        userDao.deleteUser(userId);
     }
 }

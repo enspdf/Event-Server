@@ -9,6 +9,7 @@ import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class EventDaoImpl implements EventDao {
     private SessionFactory sessionFactory;
 
     @Override
+    @Transactional(readOnly = true)
     public List<EventReport> getAllEvents() {
         StringBuilder strSelect = new StringBuilder();
         strSelect.append(" SELECT ");
@@ -63,21 +65,25 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
+    @Transactional
     public int createEvenInt(EventDto eventDto) {
         return 0;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EventReport getEventById(Long id) {
         return null;
     }
 
     @Override
-    public EventReport updateEvent(EventDto eventDto) {
-        return null;
+    @Transactional
+    public int updateEvent(EventDto eventDto) {
+        return 0;
     }
 
     @Override
+    @Transactional
     public void deleteEvent(Long id) {
 
     }

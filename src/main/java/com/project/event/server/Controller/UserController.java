@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.HashMap;
 
 @RestController
@@ -31,5 +32,28 @@ public class UserController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("status", userService.createUser(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PostMapping("/user.update")
+    @ResponseBody
+    public ResponseEntity updateUSer (@RequestBody @Valid UserDto userDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", userService.updateUser(userDto));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/user.{id}")
+    @ResponseBody
+    public ResponseEntity getUserById (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("user", userService.getUserById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PostMapping("/user.remove.{id}")
+    @ResponseBody
+    public ResponseEntity removeUser (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

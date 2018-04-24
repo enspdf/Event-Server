@@ -50,8 +50,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventReport updateEvent(EventDto eventDto) {
-        return null;
+    public int updateEvent(EventDto eventDto) {
+        return 0;
     }
 
     @Override

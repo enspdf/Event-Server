@@ -9,6 +9,6 @@ public interface TagDao {
     List<TagReport> getAllTags ();
     int createTag (TagDto tagDto);
     TagReport getTagById (Long id);
-    TagReport updateTag (TagDto tagDto);
+    int updateTag (TagDto tagDto);
     void deleteTag (Long id);
 }
