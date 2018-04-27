@@ -32,4 +32,14 @@ public class RoleController {
         result.put("status", roleService.createRole(roleDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
+
+    @PostMapping("/role.update")
+    @ResponseBody
+    public ResponseEntity updateRole (@RequestBody @Valid RoleDto roleDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", roleService.updateRole(roleDto));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
 }

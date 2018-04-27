@@ -16,7 +16,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagReport> getAllTags() {
-        return null;
+        return tagDao.getAllTags();
     }
 
     @Override
