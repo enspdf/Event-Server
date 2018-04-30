@@ -54,6 +54,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity removeUser (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
+        userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

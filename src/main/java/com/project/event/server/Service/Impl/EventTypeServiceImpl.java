@@ -22,21 +22,21 @@ public class EventTypeServiceImpl implements EventTypeService {
 
     @Override
     public int createEventType(EventTypeDto eventTypeDto) {
-        return 0;
+        return eventTypeDao.createEventType(eventTypeDto);
     }
 
     @Override
     public EventTypeReport getEventTypeById(Long id) {
-        return null;
+        return eventTypeDao.getEventTypeById(id);
     }
 
     @Override
     public int updateEventType(EventTypeDto eventTypeDto) {
-        return 0;
+        return eventTypeDao.updateEventType(eventTypeDto);
     }
 
     @Override
     public void deleteEventType(Long id) {
-
+        eventTypeDao.deleteEventType(id);
     }
 }

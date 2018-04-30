@@ -41,5 +41,19 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    @GetMapping("/role.{id}")
+    @ResponseBody
+    public ResponseEntity getRoleById (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("role", roleService.getRoleById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 
+    @PostMapping("/role.remove.{id}")
+    @ResponseBody
+    public ResponseEntity removeRole (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        roleService.deleteRole(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }

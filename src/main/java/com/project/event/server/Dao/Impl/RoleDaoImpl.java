@@ -42,22 +42,78 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
+    @Transactional
     public int createRole(RoleDto roleDto) {
-        return 0;
+        StringBuilder strQuery = new StringBuilder();
+        strQuery.append(" INSERT INTO tblRole ");
+        strQuery.append(" (name, active) ");
+        strQuery.append(" VALUES ");
+        strQuery.append(" (:name, :active) ");
+
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+
+        query.setParameter("name", roleDto.getName(), StandardBasicTypes.STRING);
+        query.setParameter("active", roleDto.isActive(), StandardBasicTypes.BOOLEAN);
+
+        return query.executeUpdate();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public RoleReport getRoleById(Long userId) {
-        return null;
+        StringBuilder strSelect = new StringBuilder();
+        strSelect.append(" SELECT ");
+        strSelect.append(" id AS id, ");
+        strSelect.append(" name AS name, ");
+        strSelect.append(" active AS active ");
+        strSelect.append(" FROM ");
+        strSelect.append(" tblRole ");
+        strSelect.append(" WHERE id = :id ");
+
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strSelect.toString());
+        query.setResultTransformer(Transformers.aliasToBean(RoleReport.class));
+        query.setParameter("id", userId, StandardBasicTypes.LONG);
+
+        query.addScalar("id", StandardBasicTypes.LONG);
+        query.addScalar("name", StandardBasicTypes.STRING);
+        query.addScalar("active", StandardBasicTypes.BOOLEAN);
+
+        return (RoleReport) query.uniqueResult();
     }
 
     @Override
+    @Transactional
     public int updateRole(RoleDto roleDto) {
-        return 0;
+        StringBuilder strQuery = new StringBuilder();
+        strQuery.append(" UPDATE ");
+        strQuery.append(" tblRole ");
+        strQuery.append(" SET name = :name, ");
+        strQuery.append(" active = :active ");
+        strQuery.append(" WHERE ");
+        strQuery.append(" id = :id ");
+
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+
+        query.setParameter("name", roleDto.getName(), StandardBasicTypes.STRING);
+        query.setParameter("active", roleDto.isActive(), StandardBasicTypes.BOOLEAN);
+        query.setParameter("id", roleDto.getId(), StandardBasicTypes.LONG);
+
+        return query.executeUpdate();
     }
 
     @Override
+    @Transactional
     public void deleteRole(Long roleId) {
+        StringBuilder strQuery = new StringBuilder();
+        strQuery.append(" DELETE ");
+        strQuery.append(" FROM ");
+        strQuery.append(" tblRole ");
+        strQuery.append(" WHERE ");
+        strQuery.append(" id = :id ");
 
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+        query.setParameter("id", roleId, StandardBasicTypes.LONG);
+
+        query.executeUpdate();
     }
 }

@@ -41,21 +41,21 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public int createEvenInt(EventDto eventDto) {
-        return 0;
+        return eventDao.createEvenInt(eventDto);
     }
 
     @Override
     public EventReport getEventById(Long id) {
-        return null;
+        return eventDao.getEventById(id);
     }
 
     @Override
     public int updateEvent(EventDto eventDto) {
-        return 0;
+        return eventDao.updateEvent(eventDto);
     }
 
     @Override
     public void deleteEvent(Long id) {
-
+        eventDao.deleteEvent(id);
     }
 }

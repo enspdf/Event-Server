@@ -53,6 +53,7 @@ public class TagController {
     @ResponseBody
     public ResponseEntity removeTag (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
+        tagService.deleteTag(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

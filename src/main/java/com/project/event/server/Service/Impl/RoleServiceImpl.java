@@ -22,21 +22,21 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int createRole(RoleDto roleDto) {
-        return 0;
+        return roleDao.createRole(roleDto);
     }
 
     @Override
     public RoleReport getRoleById(Long userId) {
-        return null;
+        return roleDao.getRoleById(userId);
     }
 
     @Override
     public int updateRole(RoleDto roleDto) {
-        return 0;
+        return roleDao.updateRole(roleDto);
     }
 
     @Override
     public void deleteRole(Long roleId) {
-
+        roleDao.deleteRole(roleId);
     }
 }
