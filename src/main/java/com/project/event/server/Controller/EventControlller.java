@@ -32,4 +32,28 @@ public class EventControlller {
         result.put("status", eventService.createEvenInt(eventDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
+
+    @PostMapping("/event.update")
+    @ResponseBody
+    public ResponseEntity updateEvent (@RequestBody @Valid EventDto eventDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", eventService.updateEvent(eventDto));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/event.{id}")
+    @ResponseBody
+    public ResponseEntity getEventById (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("event", eventService.getEventById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PostMapping("/event.remove.{id}")
+    @ResponseBody
+    public ResponseEntity removeEvent (@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        eventService.deleteEvent(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }
