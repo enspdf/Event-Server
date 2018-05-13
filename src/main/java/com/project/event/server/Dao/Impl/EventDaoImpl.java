@@ -10,6 +10,7 @@ import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -88,7 +89,14 @@ public class EventDaoImpl implements EventDao {
         query.setParameter("published", eventDto.isPublishedActive(), StandardBasicTypes.BOOLEAN);
         query.setParameter("publishedDate", eventDto.getPublishedDate(), StandardBasicTypes.DATE);
 
-        return query.executeUpdate();
+        query.executeUpdate();
+
+        NativeQuery queryLastInsert = sessionFactory.getCurrentSession().createNativeQuery(" SELECT LAST_INSERT_ID() AS eventId ");
+        queryLastInsert.addScalar("eventId", StandardBasicTypes.INTEGER);
+
+        int eventCreatedId = (int) queryLastInsert.uniqueResult();
+
+        return eventCreatedId;
     }
 
     @Override

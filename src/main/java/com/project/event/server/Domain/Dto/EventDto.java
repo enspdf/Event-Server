@@ -1,6 +1,7 @@
 package com.project.event.server.Domain.Dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class EventDto {
     private Long id;
@@ -18,6 +19,7 @@ public class EventDto {
     private boolean publishedActive;
     private Date creationDate;
     private Date updateDate;
+    private List<Long> tagIds;
 
     public Long getId() {
         return id;
@@ -137,5 +139,13 @@ public class EventDto {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<Long> getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(List<Long> tagIds) {
+        this.tagIds = tagIds;
     }
 }

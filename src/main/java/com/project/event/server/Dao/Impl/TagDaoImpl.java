@@ -54,6 +54,19 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
+    @Transactional
+    public int createTagEvent(int eventId, List<Long> tagList) {
+        StringBuilder strQuery = new StringBuilder();
+        strQuery.append(" INSERT INTO tblTagEvent (idEvent, idTag) VALUES ");
+        for (Long tagId : tagList) {
+            strQuery.append(" ( " + eventId + " , " + tagId + " ) ");
+        }
+        strQuery.setLength(strQuery.length() - 1);
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+        return query.executeUpdate();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public TagReport getTagById(Long id) {
         StringBuilder strSelect = new StringBuilder();

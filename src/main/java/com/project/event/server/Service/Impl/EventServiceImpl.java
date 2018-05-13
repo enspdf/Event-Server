@@ -2,6 +2,7 @@ package com.project.event.server.Service.Impl;
 
 import com.project.event.server.Dao.EventDao;
 import com.project.event.server.Dao.EventTypeDao;
+import com.project.event.server.Dao.TagDao;
 import com.project.event.server.Dao.UserDao;
 import com.project.event.server.Domain.Dto.EventDto;
 import com.project.event.server.Domain.Report.EventReport;
@@ -24,6 +25,9 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventTypeDao eventTypeDao;
 
+    @Autowired
+    private TagDao tagDao;
+
     @Override
     public List<EventReport> getAllEvents() {
         List<EventReport> eventReports = new ArrayList<>();
@@ -41,7 +45,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public int createEvenInt(EventDto eventDto) {
-        return eventDao.createEvenInt(eventDto);
+        int eventId = eventDao.createEvenInt(eventDto);
+
+        if (eventDto.getTagIds() != null && eventDto.getTagIds().size() > 0) {
+            tagDao.createTagEvent(eventId, eventDto.getTagIds());
+        }
+
+        return 1;
     }
 
     @Override
