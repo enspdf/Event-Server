@@ -53,7 +53,8 @@ public class CommentDaoImpl implements CommentDao {
         strSelect.append(" SELECT ");
         strSelect.append(" id AS id, ");
         strSelect.append(" comment AS comment, ");
-        strSelect.append(" idEvent AS idUser, ");
+        strSelect.append(" idEvent AS idEvent, ");
+        strSelect.append(" idUser AS idUser, ");
         strSelect.append(" creationDate AS creationDate, ");
         strSelect.append(" updateDate AS updateDate ");
         strSelect.append(" FROM ");
@@ -62,6 +63,8 @@ public class CommentDaoImpl implements CommentDao {
 
         NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strSelect.toString());
         query.setResultTransformer(Transformers.aliasToBean(CommentReport.class));
+
+        query.setParameter("idEvent", eventId, StandardBasicTypes.LONG);
 
         query.addScalar("id", StandardBasicTypes.LONG);
         query.addScalar("comment", StandardBasicTypes.TEXT);

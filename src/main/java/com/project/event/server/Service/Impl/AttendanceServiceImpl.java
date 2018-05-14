@@ -26,7 +26,17 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public List<AttendanceReport> getAllAttendance() {
-        return attendanceDao.getAllAttendance();
+        List<AttendanceReport> attendanceReports = new ArrayList<>();
+        List<AttendanceReport> attendanceList = new ArrayList<>();
+        attendanceReports = attendanceDao.getAllAttendance();
+
+        for (AttendanceReport attendanceReport : attendanceReports) {
+            attendanceReport.setUserReport(userDao.getUserById(attendanceReport.getIdUser()));
+            attendanceReport.setEventReport(eventDao.getEventById(attendanceReport.getIdEvent()));
+            attendanceList.add(attendanceReport);
+        }
+
+        return attendanceList;
     }
 
     @Override
@@ -36,7 +46,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendanceReports = attendanceDao.getAllAttendanceByEvent(id);
 
         for (AttendanceReport attendanceReport : attendanceReports) {
-            attendanceReport.setUserReport(userDao.getUserById(attendanceReport.getIduser()));
+            attendanceReport.setUserReport(userDao.getUserById(attendanceReport.getIdUser()));
             attendanceReport.setEventReport(eventDao.getEventById(attendanceReport.getIdEvent()));
             attendanceList.add(attendanceReport);
         }

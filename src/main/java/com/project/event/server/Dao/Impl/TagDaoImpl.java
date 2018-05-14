@@ -59,7 +59,7 @@ public class TagDaoImpl implements TagDao {
         StringBuilder strQuery = new StringBuilder();
         strQuery.append(" INSERT INTO tblTagEvent (idEvent, idTag) VALUES ");
         for (Long tagId : tagList) {
-            strQuery.append(" ( " + eventId + " , " + tagId + " ) ");
+            strQuery.append(" (" + eventId + ", " + tagId + " ),");
         }
         strQuery.setLength(strQuery.length() - 1);
         NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());

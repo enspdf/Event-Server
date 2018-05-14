@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS tblEvent (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(45) NOT NULL,
-  description VARCHAR(45) NOT NULL,
+  description TEXT NOT NULL,
   longitude VARCHAR(45) NOT NULL,
   latitude VARCHAR(45) NOT NULL,
   date VARCHAR(45) NOT NULL,

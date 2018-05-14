@@ -56,7 +56,7 @@ public class AttendanceDaoImpl implements AttendanceDao {
         strQuery.append(" idEvent AS idEvent ");
         strQuery.append(" FROM ");
         strQuery.append(" tblAttendance ");
-        strQuery.append(" WHERE id = :id ");
+        strQuery.append(" WHERE idEvent = :id ");
 
         NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
         query.setResultTransformer(Transformers.aliasToBean(AttendanceReport.class));
@@ -124,6 +124,7 @@ public class AttendanceDaoImpl implements AttendanceDao {
         strQuery.append(" UPDATE ");
         strQuery.append(" tblAttendance ");
         strQuery.append(" SET attendance = :attendance, ");
+        strQuery.append(" rate = :rate, ");
         strQuery.append(" idUser = :idUser, ");
         strQuery.append(" idEvent = :idEvent ");
         strQuery.append(" WHERE ");
@@ -131,7 +132,9 @@ public class AttendanceDaoImpl implements AttendanceDao {
 
         NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
 
+        query.setParameter("id", attendanceDto.getId(),StandardBasicTypes.LONG);
         query.setParameter("attendance", attendanceDto.isAttendance(), StandardBasicTypes.BOOLEAN);
+        query.setParameter("rate", attendanceDto.getRate(), StandardBasicTypes.INTEGER);
         query.setParameter("idUser", attendanceDto.getIdUser(), StandardBasicTypes.LONG);
         query.setParameter("idEvent", attendanceDto.getIdEvent(), StandardBasicTypes.LONG);
 

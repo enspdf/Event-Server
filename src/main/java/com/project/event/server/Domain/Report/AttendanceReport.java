@@ -4,7 +4,7 @@ public class AttendanceReport {
     private Long id;
     private boolean attendance;
     private int rate;
-    private Long iduser;
+    private Long idUser;
     private UserReport userReport;
     private Long idEvent;
     private EventReport eventReport;
@@ -33,12 +33,12 @@ public class AttendanceReport {
         this.rate = rate;
     }
 
-    public Long getIduser() {
-        return iduser;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setIduser(Long iduser) {
-        this.iduser = iduser;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public UserReport getUserReport() {

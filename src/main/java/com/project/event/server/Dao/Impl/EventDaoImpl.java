@@ -70,7 +70,7 @@ public class EventDaoImpl implements EventDao {
     public int createEvenInt(EventDto eventDto) {
         StringBuilder strQuery = new StringBuilder();
         strQuery.append(" INSERT INTO tblEvent ");
-        strQuery.append(" (title, description, longitude, latitude, date, address, active, cost, userId, eventTypeId, published, publishedDate) ");
+        strQuery.append(" (title, description, longitude, latitude, date, address, active, cost, idUser, idEventType, published, publishedDate) ");
         strQuery.append(" VALUES ");
         strQuery.append(" (:title, :description, :longitude, :latitude, :date, :address, :active, :cost, :userId, :eventTypeId, :published, :publishedDate) ");
 
@@ -80,10 +80,10 @@ public class EventDaoImpl implements EventDao {
         query.setParameter("description", eventDto.getDescription(), StandardBasicTypes.STRING);
         query.setParameter("longitude", eventDto.getLongitude(), StandardBasicTypes.STRING);
         query.setParameter("latitude", eventDto.getLatitude(), StandardBasicTypes.STRING);
-        query.setParameter("date", eventDto.getDate(), StandardBasicTypes.STRING);
+        query.setParameter("date", eventDto.getDate(), StandardBasicTypes.DATE);
         query.setParameter("address", eventDto.getAddress(), StandardBasicTypes.STRING);
         query.setParameter("active", eventDto.isActive(), StandardBasicTypes.BOOLEAN);
-        query.setParameter("cost", eventDto.getCost(), StandardBasicTypes.STRING);
+        query.setParameter("cost", eventDto.getCost(), StandardBasicTypes.DOUBLE);
         query.setParameter("userId", eventDto.getIdUser(), StandardBasicTypes.LONG);
         query.setParameter("eventTypeId", eventDto.getIdEventType(), StandardBasicTypes.LONG);
         query.setParameter("published", eventDto.isPublishedActive(), StandardBasicTypes.BOOLEAN);
@@ -161,11 +161,12 @@ public class EventDaoImpl implements EventDao {
         strQuery.append(" address = :address, ");
         strQuery.append(" active = :active, ");
         strQuery.append(" cost = :cost, ");
-        strQuery.append(" eventTypeId = :eventTypeId ");
+        strQuery.append(" idEventType = :eventTypeId ");
         strQuery.append(" WHERE ");
         strQuery.append(" id = :id ");
 
         NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+        query.setParameter("id", eventDto.getId(), StandardBasicTypes.LONG);
         query.setParameter("title", eventDto.getTitle(), StandardBasicTypes.STRING);
         query.setParameter("description", eventDto.getDescription(), StandardBasicTypes.STRING);
         query.setParameter("longitude", eventDto.getLongitude(), StandardBasicTypes.STRING);
