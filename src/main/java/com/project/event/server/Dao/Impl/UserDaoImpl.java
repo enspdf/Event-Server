@@ -22,6 +22,28 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional(readOnly = true)
+    public int userLogin (String username, String password) {
+        StringBuilder strQuery = new StringBuilder();
+        strQuery.append(" SELECT EXISTS ( ");
+        strQuery.append(" SELECT ");
+        strQuery.append(" id ");
+        strQuery.append(" FROM ");
+        strQuery.append(" tblUser ");
+        strQuery.append(" WHERE email = :email");
+        strQuery.append(" AND password = :password ");
+        strQuery.append(" ) AS exist ");
+
+        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(strQuery.toString());
+        query.setParameter("email", username, StandardBasicTypes.STRING);
+        query.setParameter("password", password, StandardBasicTypes.STRING);
+
+        query.addScalar("exist", StandardBasicTypes.INTEGER);
+
+        return (int) query.uniqueResult();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<UserReport> getAllUsers() {
         StringBuilder strSelect = new StringBuilder();
         strSelect.append(" SELECT ");

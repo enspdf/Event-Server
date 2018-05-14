@@ -1,6 +1,7 @@
 package com.project.event.server.Controller;
 
 import com.project.event.server.Domain.Dto.UserDto;
+import com.project.event.server.Domain.Dto.UserLoginDto;
 import com.project.event.server.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,13 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.util.HashMap;
 
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @PostMapping("/user.login")
+    @ResponseBody
+    public ResponseEntity userLogin (@RequestBody @Valid UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("exist", userService.userLogin(userLoginDto.getUsername(), userLoginDto.getPassword()));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 
     @GetMapping("/user.list")
     @ResponseBody
